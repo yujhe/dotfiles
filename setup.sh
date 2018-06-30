@@ -37,8 +37,8 @@ ln $params $script_home/custom.aliases.bash $HOME/.bash_it/aliases/custom.aliase
 
 # Add solarized colors for vim if not present
 if [ ! -f $HOME/.vim/colors/solarized.vim ]; then
-    curl -fLo $HOME/.vim/colors/solarized.vim --create-dirs \
-    https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+  curl -fLo $HOME/.vim/colors/solarized.vim --create-dirs \
+  https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 fi
 
 # Install bash-completion if it's not
@@ -47,7 +47,7 @@ if [ ! -d $(brew --prefix bash-completion) ]; then
 fi
 
 # Install tmux plugin manager
-if [ ! -d $HOME/.tmux/plugins/tmp ]; then
+if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
