@@ -41,6 +41,11 @@ if [ ! -f $HOME/.vim/colors/solarized.vim ]; then
     https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 fi
 
+# Install bash-completion if it's not
+if [ ! -d $(brew --prefix bash-completion) ]; then
+  brew install bash-completion
+fi
+
 # Symlink all of our dotfiles to the home directory
 for i in .vimrc .dircolors .bashrc .bash_profile .tmux.conf;
 do
