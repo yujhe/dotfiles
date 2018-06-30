@@ -27,6 +27,11 @@ else
   git clone --depth=1 https://github.com/Bash-it/bash-it.git $HOME/.bash_it
 fi
 
+# install coreutils it's not
+if [ ! -d $(brew --prefix coreutils) ]; then
+  brew install coreutils
+fi
+
 # Add our custom aliases to bash-it
 ln $params $script_home/custom.aliases.bash $HOME/.bash_it/aliases/custom.aliases.bash
 
