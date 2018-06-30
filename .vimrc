@@ -1,140 +1,100 @@
-" vim-plug configuration
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
+" Don't try to be vi compatible
+set nocompatible
 
-call plug#begin('~/.vim/plugged')
+" Helps force plugins to load correctly when it is turned back on below
+filetype off
 
-Plug 'pearofducks/ansible-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'vim-syntastic/syntastic'
+" TODO: Load plugins here (pathogen or vundle)
 
-" Add plugins to &runtimepath
-call plug#end()
+" Turn on syntax highlighting
+syntax on
 
-" Leader
-let mapleader = " "
-
-set backspace=2   " Backspace deletes like most programs in insert mode
-set nobackup
-set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set history=50
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-set pastetoggle=<F10>
-set mouse=a       " Enable mouse in all modes
-set ttymouse=xterm2
-
-" Color adjustments
-syntax enable
-set background=dark
-colorscheme solarized
-
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-
+" For plugins to load correctly
 filetype plugin indent on
 
-augroup vimrcEx
-  autocmd!
+" TODO: Pick a leader key
+" let mapleader = ","
 
- " When editing a file, always jump to the last known cursor position.
- " Don't do it for commit messages, when the position is invalid, or when
- " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+" Security
+set modelines=0
 
- " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-  autocmd BufRead,BufNewFile .j2 set filetype=jinja2
-augroup END
+" Show line numbers
+set number
 
-" When the type of shell script is /bin/sh, assume a POSIX-compatible
-" shell for syntax highlighting purposes.
-let g:is_posix = 1
+" Show file stats
+set ruler
 
-" Expand tab to 2 spaces
+" Blink cursor on error instead of beeping (grr)
+set visualbell
+
+" Encoding
+set encoding=utf-8
+
+" Whitespace
+set wrap
+set textwidth=79
+set formatoptions=tcqrn1
 set tabstop=2
+set shiftwidth=2
 set softtabstop=2
 set expandtab
-set shiftwidth=2
-set smarttab
+set noshiftround
 
-" Display extra whitespace and tabs as characters, but not by default
-set list
-set listchars=tab:»·,trail:·,nbsp:·
+" Cursor motion
+set scrolloff=3
+set backspace=indent,eol,start
+set matchpairs+=<:> " use % to jump between pairs
+runtime! macros/matchit.vim
 
-" Use one space, not two, after punctuation.
-set nojoinspaces
+" Move up/down editor lines
+nnoremap j gj
+nnoremap k gk
 
-" Numbers
-set number
-set numberwidth=5
+" Allow hidden buffers
+set hidden
 
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+" Rendering
+set ttyfast
 
-" Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
+" Status bar
+set laststatus=2
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
+" Last line
+set showmode
+set showcmd
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
+" Searching
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+map <leader><space> :let @/=''<cr> " clear search
 
-nnoremap <C-n> <c-w><
-nnoremap <C-m> <c-w>>
+" Remap help key.
+inoremap <F1> <ESC>:set invfullscreen<CR>a
+nnoremap <F1> :set invfullscreen<CR>
+vnoremap <F1> :set invfullscreen<CR>
 
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" Textmate holdouts
 
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
+" Formatting
+map <leader>q gqip
 
-" Always use vertical diffs
-set diffopt+=vertical
+" Visualize tabs and newlines
+set listchars=tab:▸\ ,eol:¬
+" Uncomment this to enable by default:
+" set list " To enable by default
+" Or use your leader key + l to toggle on/off
+map <leader>l :set list!<CR> " Toggle tabs and EOL
 
-" Set the statusline
-set statusline=%f         " Path to the file
-set statusline+=%y        " Filetype of the file
-set statusline+=%=        " Switch to the right side
-set statusline+=Current:\ %-4l " Display current line
-set statusline+=Total:\ %-4L " Dispay total lines
-set statusline+=%{fugitive#statusline()} " Git status
-
-" map nerdtree viewport to CTRL+n
-
-map <C-t> :NERDTreeToggle<CR>
-
-" Options for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Color scheme (terminal)
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+" in ~/.vim/colors/ and uncomment:
+" colorscheme solarized
