@@ -47,3 +47,10 @@ set -o vi
 
 # Set default editor to vim
 export EDITOR=vim
+
+# Load anyenv
+if [ -d ${HOME}/.anyenv/bin ]; then
+  export PATH="${HOME}/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+fi
+
