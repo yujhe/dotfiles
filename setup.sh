@@ -46,6 +46,11 @@ if [ ! -d $(brew --prefix bash-completion) ]; then
   brew install bash-completion
 fi
 
+# Install tmux plugin manager
+if [ ! -d $HOME/.tmux/plugins/tmp ]; then
+  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+fi
+
 # Symlink all of our dotfiles to the home directory
 for i in .vimrc .dircolors .bashrc .bash_profile .tmux.conf;
 do
