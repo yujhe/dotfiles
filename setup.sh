@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 params="-sf"
 
@@ -49,6 +49,14 @@ fi
 # Install tmux plugin manager
 if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+fi
+
+# Update anyenv if it's already installed or download it if it's not
+if [ -d $HOME/.anyenv ]; then
+  cd $HOME/.anyenv
+  git pull
+else
+  git clone https://github.com/riywo/anyenv $HOME/.anyenv
 fi
 
 # Symlink all of our dotfiles to the home directory
