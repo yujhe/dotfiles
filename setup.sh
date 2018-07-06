@@ -19,6 +19,11 @@ done
 # Store where the script was called from so we can reference it later
 script_home="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# install git if it's not
+if [ ! -d $(brew --prefix git) ]; then
+  brew install git
+fi
+
 # Update bash-it if it's already installed or download it if it's not
 if [ -d $HOME/.bash_it ]; then
   cd $HOME/.bash_it
