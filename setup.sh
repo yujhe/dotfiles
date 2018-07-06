@@ -51,6 +51,11 @@ if [ ! -d $(brew --prefix bash-completion) ]; then
   brew install bash-completion
 fi
 
+# Install tmux if it's not
+if [ ! -d $(brew --prefix tmux) ]; then
+  brew install tmux
+fi
+
 # Install tmux plugin manager
 if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
