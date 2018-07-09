@@ -52,6 +52,6 @@ if [ -d ${HOME}/.anyenv/bin ]; then
 fi
 
 # Load bash-completion
-if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
-  source `brew --prefix`/etc/bash_completion.d/git-completion.bash
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  source `brew --prefix`/etc/bash_completion
 fi

@@ -51,6 +51,14 @@ if [ ! -d $(brew --prefix bash-completion) ]; then
   brew install bash-completion
 fi
 
+# Symlink docker bash completion to bash-completion
+docker_resrc=/Applications/Docker.app/Contents/Resources
+if [ -d $docker_resrc ]; then
+  ln -s $docker_resrc/etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
+  ln -s $docker_resrc/etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
+  ln -s $docker_resrc/etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
+fi
+
 # Install tmux if it's not
 if [ ! -d $(brew --prefix tmux) ]; then
   brew install tmux
