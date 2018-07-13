@@ -77,6 +77,11 @@ else
   git clone https://github.com/riywo/anyenv $HOME/.anyenv
 fi
 
+# Install jq if it's not
+if [ ! -d $(brew --prefix jq) ]; then
+  brew install jq
+fi
+
 # Symlink all of our dotfiles to the home directory
 for i in .vimrc .dircolors .bashrc .bash_profile .tmux.conf;
 do
