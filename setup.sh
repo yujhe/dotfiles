@@ -97,6 +97,15 @@ else
 fi
 
 
+echo '* install tree...'
+if [ ! -d $(brew --prefix tree) ]; then
+  echo 'start installing tree'
+  brew install tree
+else
+  echo 'tree is already installed'
+fi
+
+
 echo '* add solarized colors for vim...'
 if [ ! -f $HOME/.vim/colors/solarized.vim ]; then
   curl -fLo $HOME/.vim/colors/solarized.vim --create-dirs \
