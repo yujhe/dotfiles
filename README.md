@@ -11,6 +11,7 @@ This is my personal collection of dotfile customizations.
 * [jq](https://stedolan.github.io/jq/): lightweight and flexible command-line JSON processor
 * tmux: terminal multiplexer
 * tpm (tmux plugins manager)
+* tree: a recursive directory listing command that produces a depth indented listing of files
 
 # Setup
 Setup is simple. Just run `setup.sh` and it will symlink all of the dotfiles into your home directory. The symlink allows you to automatically receive any updates after running a `git pull` in the future.
