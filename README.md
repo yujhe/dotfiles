@@ -8,6 +8,7 @@ This is my personal collection of dotfile customizations.
 * bash-completion
 * [bat](https://github.com/sharkdp/bat): a cat(1) clone with syntax highlighting and Git integration
 * docker auto-completion setup
+* [fzf](https://github.com/junegunn/fzf): a general-purpose command-line fuzzy finder
 * git, git auto-completion setup
 * [jq](https://stedolan.github.io/jq/): lightweight and flexible command-line JSON processor
 * tmux: terminal multiplexer

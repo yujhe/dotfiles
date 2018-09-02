@@ -115,6 +115,18 @@ else
 fi
 
 
+echo '* install fzf...'
+if [ ! -d $(brew --prefix fzf) ]; then
+  echo 'start installing fzf'
+  brew install fzf
+  # To install useful key bindings and fuzzy completion:
+  printf 'y\ny\nn\n' | $(brew --prefix)/opt/fzf/install
+else
+  echo 'fzf is already installed, upgrading it'
+  brew update; brew reinstall fzf
+fi
+
+
 echo '* add solarized colors for vim...'
 if [ ! -f $HOME/.vim/colors/solarized.vim ]; then
   curl -fLo $HOME/.vim/colors/solarized.vim --create-dirs \

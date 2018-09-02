@@ -5,6 +5,9 @@ alias egrep="egrep --color=always"
 alias gc="git commit -S -v"
 alias gcm="git commit -S -v -m"
 alias sudo="sudo -E"
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+# add support for ctrl+o to open selected file in VS Code
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})+abort'"
 
 # Commit and push everything
 gitdone() { git add -A; git commit -S -v -m "$1"; git push; }

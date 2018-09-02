@@ -55,3 +55,8 @@ fi
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   source `brew --prefix`/etc/bash_completion
 fi
+
+# Load fzf
+if [ -f ${HOME}/.fzf.bash ]; then
+  source ${HOME}/.fzf.bash
+fi
