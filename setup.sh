@@ -24,13 +24,14 @@ if [ ! -d $(brew --prefix git) ]; then
   echo 'start installing git'
   brew install git
 else
-  echo 'git is already installed'
+  echo 'git is already installed, go updating...'
+  brew update; brew reinstall git
 fi
 
 
 echo '* install bash-it...'
 if [ -d $HOME/.bash_it ]; then
-  echo 'bash-it is already installed, update to up to date'
+  echo 'bash-it is already installed, go updating...'
   cd $HOME/.bash_it
   git pull
 else
@@ -46,7 +47,8 @@ if [ ! -d $(brew --prefix coreutils) ]; then
   echo 'start installing coreutils'
   brew install coreutils
 else
-  echo 'coreutils is installed'
+  echo 'coreutils is installed, go updating...'
+  brew update; brew reinstall coreutils
 fi
 
 
@@ -55,7 +57,8 @@ if [ ! -d $(brew --prefix bash-completion) ]; then
   echo 'start installing bash-completion'
   brew install bash-completion
 else
-  echo 'bash-completion is already installed'
+  echo 'bash-completion is already installed, go updating...'
+  brew update; brew reinstall bash-completion
 fi
 
 
@@ -64,7 +67,8 @@ if [ ! -d $(brew --prefix tmux) ]; then
   echo 'start installing tmux'
   brew install tmux
 else
-  echo 'tmux is already installed'
+  echo 'tmux is already installed, go updating...'
+  brew update; brew reinstall tmux
 fi
 
 
@@ -73,7 +77,9 @@ if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   echo 'start installing tmux plugin manager'
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 else
-  echo 'tmux plugin manager is already installed'
+  echo 'tmux plugin manager is already installed, go updating...'
+  cd $HOME/.tmux/plugins/tpm
+  git pull
 fi
 
 
@@ -82,7 +88,7 @@ if [ ! -d $HOME/.anyenv ]; then
   echo 'start installing anyenv'
   git clone https://github.com/riywo/anyenv $HOME/.anyenv
 else
-  echo 'anyenv is already installed, update to up to date'
+  echo 'anyenv is already installed, go updating...'
   cd $HOME/.anyenv
   git pull
 fi
@@ -93,7 +99,8 @@ if [ ! -d $(brew --prefix jq) ]; then
   echo 'start installing jq'
   brew install jq
 else
-  echo 'jq is already installed'
+  echo 'jq is already installed, go updating...'
+  brew update; brew reinstall jq
 fi
 
 
@@ -102,7 +109,8 @@ if [ ! -d $(brew --prefix tree) ]; then
   echo 'start installing tree'
   brew install tree
 else
-  echo 'tree is already installed'
+  echo 'tree is already installed, go updating...'
+  brew update; brew reinstall tree
 fi
 
 
@@ -111,7 +119,8 @@ if [ ! -d $(brew --prefix bat) ]; then
   echo 'start installing bat'
   brew install bat
 else
-  echo 'bat is already installed'
+  echo 'bat is already installed, go updating...'
+  brew update; brew reinstall bat
 fi
 
 
@@ -122,7 +131,7 @@ if [ ! -d $(brew --prefix fzf) ]; then
   # To install useful key bindings and fuzzy completion:
   printf 'y\ny\nn\n' | $(brew --prefix)/opt/fzf/install
 else
-  echo 'fzf is already installed, upgrading it'
+  echo 'fzf is already installed, go upgrading...'
   brew update; brew reinstall fzf
 fi
 
