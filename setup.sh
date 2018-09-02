@@ -106,6 +106,15 @@ else
 fi
 
 
+echo '* install bat...'
+if [ ! -d $(brew --prefix bat) ]; then
+  echo 'start installing bat'
+  brew install bat
+else
+  echo 'bat is already installed'
+fi
+
+
 echo '* add solarized colors for vim...'
 if [ ! -f $HOME/.vim/colors/solarized.vim ]; then
   curl -fLo $HOME/.vim/colors/solarized.vim --create-dirs \
