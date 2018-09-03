@@ -155,3 +155,6 @@ for i in .vimrc .dircolors .bashrc .bash_profile .tmux.conf;
 do
   ln $params $script_home/$i $HOME/$i
 done
+
+echo 'reload dotfiles...'
+exec $SHELL -l
