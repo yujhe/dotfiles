@@ -150,6 +150,7 @@ if [ -d $docker_resrc ]; then
   ln -sf $docker_resrc/etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 fi
 
+cd $script_home
 # Symlink all of our dotfiles to the home directory
 for i in .vimrc .dircolors .bashrc .bash_profile .tmux.conf;
 do
