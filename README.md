@@ -7,6 +7,7 @@ This is my personal collection of dotfile customizations.
 * [bash-it](https://github.com/Bash-it/bash-it): a collection of community Bash commands and scripts
 * bash-completion
 * [bat](https://github.com/sharkdp/bat): a cat(1) clone with syntax highlighting and Git integration
+* [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): strives to make your diff's human readable instead of machine readable
 * docker auto-completion setup
 * [fzf](https://github.com/junegunn/fzf): a general-purpose command-line fuzzy finder
 * git, git auto-completion setup
