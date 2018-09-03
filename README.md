@@ -12,6 +12,7 @@ This is my personal collection of dotfile customizations.
 * [fzf](https://github.com/junegunn/fzf): a general-purpose command-line fuzzy finder
 * git, git auto-completion setup
 * [jq](https://stedolan.github.io/jq/): lightweight and flexible command-line JSON processor
+* [tldr](https://tldr.sh/): simplify the beloved man pages with practical examples
 * tmux: terminal multiplexer
 * tpm (tmux plugins manager)
 * tree: a recursive directory listing command that produces a depth indented listing of files

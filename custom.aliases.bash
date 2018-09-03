@@ -8,6 +8,7 @@ alias sudo="sudo -E"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})+abort'"
+alias help='tldr'
 
 # Commit and push everything
 gitdone() { git add -A; git commit -S -v -m "$1"; git push; }

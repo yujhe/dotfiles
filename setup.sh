@@ -162,6 +162,16 @@ else
 fi
 
 
+echo '* install tldr...'
+if [ ! -d $(brew --prefix tldr) ]; then
+  echo 'start installing tldr'
+  brew install tldr
+else
+  echo 'tldr is already installed, go upgrading...'
+  brew update; brew reinstall tldr
+fi
+
+
 echo '* add solarized colors for vim...'
 if [ ! -f $HOME/.vim/colors/solarized.vim ]; then
   curl -fLo $HOME/.vim/colors/solarized.vim --create-dirs \
