@@ -1,7 +1,8 @@
 # dotfiles
 
-This is my personal collection of dotfile customizations.
+My personal dotfiles.
 
+## Packages
 * [anyenv](https://github.com/riywo/anyenv): all in one for \*\*env
 * auto-completion
 * [bash-it](https://github.com/Bash-it/bash-it): a collection of community Bash commands and scripts
@@ -18,7 +19,11 @@ This is my personal collection of dotfile customizations.
 * tree: a recursive directory listing command that produces a depth indented listing of files
 
 # Setup
-Setup is simple. Just run `setup.sh` and it will symlink all of the dotfiles into your home directory. The symlink allows you to automatically receive any updates after running a `git pull` in the future.
+Setup is simple. Just run `install.sh` for packages installation. Run `upgrade.sh` to for packages upgrade. Run `setup.sh` for symbolic link all dotfiles.
+
+* [install.sh](./install.sh): Install packages in packages.txt (only support the above [packages](#Packages).
+* [upgrade.sh](./upgrade.sh): Upgrade installed packages in packages.txt (only support the above [packages](#Packages).
+* [setup.sh](./setup.sh): Symbolic link dotfiles into your home directory, it allows you to automatically receive any updates after running a `git pull` in the future. 
 
 # Pre-requirements
 
