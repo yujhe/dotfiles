@@ -19,10 +19,10 @@ My personal dotfiles.
 * tree: a recursive directory listing command that produces a depth indented listing of files
 
 # Setup
-Setup is simple. Just run `install.sh` for packages installation. Run `upgrade.sh` to for packages upgrade. Run `setup.sh` for symbolic link all dotfiles.
+Setup is easy. Run `install.sh` for packages installation, `upgrade.sh` to for packages upgrade, `setup.sh` for symbolic link all dotfiles.
 
-* [install.sh](./install.sh): Install packages in packages.txt (only support the above [packages](#Packages).
-* [upgrade.sh](./upgrade.sh): Upgrade installed packages in packages.txt (only support the above [packages](#Packages).
+* [install.sh](./install.sh): Install packages in packages.txt (only support the above [packages](#Packages)).
+* [upgrade.sh](./upgrade.sh): Upgrade installed packages in packages.txt (only support the above [packages](#Packages)).
 * [setup.sh](./setup.sh): Symbolic link dotfiles into your home directory, it allows you to automatically receive any updates after running a `git pull` in the future. 
 
 # Pre-requirements
