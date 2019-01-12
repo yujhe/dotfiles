@@ -14,10 +14,6 @@ if [ -e ~/.dircolors ]; then
   eval `dircolors -b ~/.dircolors`
 fi
 
-# Lock and Load a custom theme file
-# location /.bash_it/themes/
-export BASH_IT_THEME='sexy'
-
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true
 
@@ -26,13 +22,16 @@ complete -cf sudo
 
 # Load Bash It
 export BASH_IT="$HOME/.bash_it"
-
+# Lock and Load a custom theme file
+# location /.bash_it/themes/
+export BASH_IT_THEME='sexy'
 if [ -e $BASH_IT/bash_it.sh ]; then
   source $BASH_IT/bash_it.sh
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+# Add python bin dir to path
 if [ -d /usr/local/opt/python/libexec/bin ]; then
   export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
