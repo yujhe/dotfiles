@@ -17,3 +17,8 @@ else
 fi
 unset __conda_setup
 # <<< conda init <<<
+
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# init jenv
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
