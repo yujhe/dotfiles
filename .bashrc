@@ -61,3 +61,4 @@ if [ -f ${HOME}/.fzf.bash ]; then
 fi
 
 export PATH=~/.local/bin:$PATH
+export PATH=~/go/bin:$PATH
