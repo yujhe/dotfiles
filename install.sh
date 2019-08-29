@@ -98,6 +98,8 @@ if grep -Fxq "diff-so-fancy" $packages_file; then
     git config --global color.diff.old        "red bold"
     git config --global color.diff.new        "green bold"
     git config --global color.diff.whitespace "red reverse"
+
+    git config --bool --global diff-so-fancy.stripLeadingSymbols false
   else
     echo "diff-so-fancy is already installed"
   fi
