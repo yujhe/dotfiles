@@ -4,7 +4,7 @@ params="-sf"
 script_home="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Add our custom aliases to bash-it
-ln $params $script_home/custom.aliases.bash $HOME/.bash_it/aliases/custom.aliases.bash
+ln $params $script_home/custom.aliases $HOME/.bash_it/aliases/custom.aliases
 
 echo "* link docker with bash-completion ..."
 docker_resrc=/Applications/Docker.app/Contents/Resources
