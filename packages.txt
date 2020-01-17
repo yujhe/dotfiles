@@ -12,3 +12,6 @@ tldr
 tmux
 tmux-plugins
 tree
+oh-my-zsh
+zsh-completions
+zsh-syntax-highlighting

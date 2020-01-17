@@ -16,6 +16,9 @@ My personal dotfiles.
 * tmux: terminal multiplexer
 * tpm (tmux plugins manager)
 * tree: a recursive directory listing command that produces a depth indented listing of files
+* [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh): an open source, community-driven framework for managing your zsh configuration
+* [zsh-completions](https://github.com/zsh-users/zsh-completions): additional completion definitions for Zsh
+* [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting): syntax highlighting for the shell zsh
 
 # Setup
 Setup is easy. Run `install.sh` for packages installation, `upgrade.sh` to for packages upgrade, `setup.sh` for symbolic link all dotfiles.
