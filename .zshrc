@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/yu-jhe.li/.oh-my-zsh"
@@ -8,7 +8,7 @@ export ZSH="/Users/yu-jhe.li/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="node"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -79,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -128,3 +128,7 @@ if [ -e ~/.dircolors ]; then
 fi
 
 source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/custom.aliases
+
+# fix python "may have been in progress in another thread when fork() was called" issue on mac
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export no_proxy='*'
