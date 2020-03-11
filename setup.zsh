@@ -8,7 +8,7 @@ ln $params $script_home/custom.aliases ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/custom
 
 cd $script_home
 # Symlink all of our dotfiles to the home directory
-for i in .vimrc .dircolors .tmux.conf;
+for i in .vimrc .dircolors .tmux.conf .zshrc;
 do
   ln $params $script_home/$i $HOME/$i
 done
