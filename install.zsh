@@ -2,6 +2,7 @@
 
 script_home="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 packages_file="$script_home/packages.txt"
+ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 echo "start to install packages in $packages_file ..."
 
@@ -47,9 +48,9 @@ fi
 # zsh-completions
 if grep -Fxq "zsh-completions" $packages_file; then
   echo "* install zsh-completions ..."
-  if [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-completions ]; then
+  if [ ! -d $ZSH_CUSTOM/plugins/zsh-completions ]; then
     echo "start to install zsh-completions"
-    git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+    git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions
   else
     echo "zsh-completions is already installed"
   fi
@@ -58,9 +59,9 @@ fi
 # zsh-syntax-highlighting
 if grep -Fxq "zsh-syntax-highlighting" $packages_file; then
   echo "* install zsh-syntax-highlighting ..."
-  if [ ! -d $HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
+  if [ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
     echo "start to install zsh-syntax-highlighting ..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
   else
     echo "zsh-syntax-highlighting is already installed"
   fi
@@ -200,6 +201,11 @@ if [ ! -f $HOME/.vim/colors/solarized.vim ]; then
   echo "* add solarized colors for vim ..."
   curl -fLo $HOME/.vim/colors/solarized.vim --create-dirs \
   https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+fi
+
+if [ ! -f $HOME/.oh-my-zsh/themes/node.zsh-theme ]; then
+  echo "* add node.zsh-theme to oh-my-zsh ..."
+  curl -fLo $HOME/.oh-my-zsh/themes/node.zsh-theme https://raw.githubusercontent.com/skuridin/oh-my-zsh-node-theme/master/node.zsh-theme
 fi
 
 cd $script_home
