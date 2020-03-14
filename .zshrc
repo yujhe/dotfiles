@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/yu-jhe.li/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -101,7 +101,7 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # fzf config
-export FZF_BASE=$(brew --prefix)/opt/fzf/install
+export FZF_BASE=$(brew --prefix fzf)/install
 
 # Uncomment the following line to disable fuzzy completion
 # export DISABLE_FZF_AUTO_COMPLETION="true"
@@ -115,12 +115,13 @@ if [ -d ${HOME}/.anyenv/bin ]; then
   eval "$(anyenv init -)"
 fi
 
-
 export PATH=~/.local/bin:$PATH
 export PATH=~/go/bin:$PATH
 
 # aws
-source $(which aws)_zsh_completer.sh
+if [ -f $(which aws)_zsh_completer.sh ]; then
+  source $(which aws)_zsh_completer.sh
+fi
 
 # dircolors
 if [ -e ~/.dircolors ]; then
