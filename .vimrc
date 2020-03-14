@@ -98,3 +98,12 @@ let g:solarized_termtrans=1
 " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 " in ~/.vim/colors/ and uncomment:
 colorscheme solarized
+
+" color theme for vimdiff
+" https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim
+if &diff
+  colorscheme apprentice
+endif
+
+" If doing a diff. Upon writing changes to file, automatically update the differences
+autocmd BufWritePost * if &diff | diffupdate | endif
