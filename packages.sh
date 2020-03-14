@@ -3,14 +3,12 @@
 PACKAGES=(
   "anyenv"
   "bat"
+  "coreutils"
   "diff-so-fancy"
-  "docker"
   "fzf"
-  "git"
   "jq"
   "tldr"
   "tmux"
-  "tmux-plugins"
   "tree"
 )
 

@@ -1,170 +1,118 @@
-#!/bin/bash -e
+#!/bin/sh -e
 
-script_home="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-packages_file="$script_home/packages.txt"
+SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
 
-echo "start to upgrade packages in $packages_file ..."
+source $SCRIPT_HOME/packages.sh
 
-# check brew is installed
+echo "checking Homebrew is installed or not"
 if ! which -s brew; then
-  echo "ERROR: please install brew"
-  exit 1
+  while true; do
+    read -p "Homebrew is required, do you wish to install? (Y/n) " yn
+    case $yn in
+        [Yy] )
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+          break;;
+        [Nn] ) exit;;
+        * ) echo "Please answer [Y/n].";;
+    esac
+  done
 else
   brew update
 fi
 
-# git
-if grep -Fxq "git" $packages_file; then
-  echo "* upgrade git ..."
-  if [ ! -d $(brew --prefix git) ]; then
-    echo "git is not installed"
-    exit 1
-  else
-    echo "start to upgrade git"
-    brew reinstall git
-  fi
-fi
-
-# anyenv
-if grep -Fxq "anyenv" $packages_file; then
-  echo "* upgrade anyenv ..."
-  if [ ! -d $HOME/.anyenv ]; then
-    echo "anyenv is not installed"
-    exit 1
-  else
-    echo "start to upgrade anyenv"
-    cd $HOME/.anyenv; git pull
-  fi
-fi
-
-# bash-it
-if grep -Fxq "bash-it" $packages_file; then
-  echo "* upgrade bash-it ..."
-  if [ ! -d $HOME/.bash_it ]; then
-    echo "bash-it is not installed"
-    exit 1
-  else
-    echo "start to upgrade bash-it"
-    cd $HOME/.bash_it; git pull
-  fi
-fi
-
-# bash-completion
-if grep -Fxq "bash-completion" $packages_file; then
-  echo "* upgrade bash-completion ..."
-  if [ ! -d $(brew --prefix bash-completion) ]; then
-    echo "bash-completion is not installed"
-    exit 1
-  else
-    echo "start to upgrade bash-completion"
-    brew reinstall bash-completion
-  fi
-fi
-
-# bat
-if grep -Fxq "bat" $packages_file; then
-  echo "* upgrade bat ..."
-  if [ ! -d $(brew --prefix bat) ]; then
-    echo "bat is not installed"
-    exit 1
-  else
-    echo "start to upgrade bat"
-    brew reinstall bat
-  fi
-fi
-
-# coreutils
-echo "* upgrade coreutils ..."
-if [ ! -d $(brew --prefix coreutils) ]; then
-  echo "coreutils is not installed"
-  exit 1
+echo "checking Git is installed or not"
+if [ ! -d $(brew --prefix git) ]; then
+  while true; do
+    read -p "Git is required, do you wish to install? (Y/n) " yn
+    case $yn in
+        [Yy] ) brew install git; break;;
+        [Nn] ) exit;;
+        * ) echo "Please answer [Y/n].";;
+    esac
+  done
 else
-  echo "start to upgrade coreutils"
-  brew reinstall coreutils
+  brew upgrade git
 fi
 
-# diff-so-fancy
-if grep -Fxq "diff-so-fancy" $packages_file; then
-	echo "* upgrade diff-so-fancy ..."
-	if [ ! -d $(brew --prefix diff-so-fancy) ]; then
-  	echo "diff-so-fancy is not installed"
-    exit 1
-	else
-  	echo "start to upgrade diff-so-fancy"
-  	brew reinstall diff-so-fancy
-	fi
-fi
+echo "start to upgrade packages: ${PACKAGES[@]}"
+for pkg in ${PACKAGES[@]}
+do
+  echo "upgrade package: $pkg"
+  case $pkg in
+    anyenv )
+      if [ -d $HOME/.anyenv ]; then
+        cd $HOME/.anyenv && git pull && cd -
+      fi;;
+    bat )
+      brew upgrade -f bat;;
+    coreutils )
+      brew upgrade -f coreutils;;
+    diff-so-fancy )
+      brew upgrade -f diff-so-fancy;;
+    fzf )
+      brew upgrade -f fzf
+      printf 'y\ny\nn\n' | $(brew --prefix fzf)/install # set useful key bindings and fuzzy completion
+      ;;
+    jq )
+      brew upgrade -f jq;;
+    tldr )
+      brew upgrade -f tldr;;
+    tmux )
+      brew upgrade tmux
+      cd $HOME/.tmux/plugins/tpm && git pull && cd -;;
+    tree )
+      brew upgrade -f tree;;
+    * )
+      echo "undefined package: $pkg, please add to upgrade.sh"
+      exit 1;;
+  esac
+done
 
-# fzf
-if grep -Fxq "fzf" $packages_file; then
-  echo "* upgrade fzf ..."
-  if [ ! -d $(brew --prefix fzf) ]; then
-    echo "fzf is not installed"
-    exit 1
-  else
-    echo "start to upgrade fzf"
-    brew reinstall fzf
-  fi
-fi
+while true; do
+  read -p "Do you wish to upgrade packages for Bash? (Y/n) " yn
+  case $yn in
+      [Yy] )
+        echo "start to upgrade packages for Bash: ${BASH_PACKAGES[@]}"
+        for pkg in ${BASH_PACKAGES[@]}
+        do
+          case $pkg in
+            bash-it )
+              cd $HOME/.bash_it && git pull && cd -;;
+            bash-completion )
+              brew upgrade -f bash-completion;;
+            * )
+              echo "undefined package: $pkg, please add to upgrade.sh"
+              exit 1;;
+          esac
+        done
+        break;;
+      [Nn] ) break;;
+      * ) echo "Please answer [Y/n].";;
+  esac
+done
 
-# jq
-if grep -Fxq "jq" $packages_file; then
-  echo "* upgrade jq ..."
-  if [ ! -d $(brew --prefix jq) ]; then
-    echo "jq is not installed"
-    exit 1
-  else
-    echo "start to upgrade jq"
-    brew reinstall jq
-  fi
-fi
+while true; do
+  read -p "Do you wish to upgrade packages for Zsh? (Y/n) " yn
+  case $yn in
+      [Yy] )
+        echo "start to upgrade packages for Zsh: ${ZSH_PACKAGES[@]}"
+        for pkg in ${ZSH_PACKAGES[@]}
+        do
+          case $pkg in
+            oh-my-zsh )
+              env ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh;;
+            zsh-completions )
+              cd $HOME/.oh-my-zsh/custom/plugins/zsh-completions && git pull && cd -;;
+            zsh-syntax-highlighting )
+              cd $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && git pull && cd -;;
+            * )
+              echo "undefined package: $pkg, please add to upgrade.sh"
+              exit 1;;
+          esac
+        done
+        break;;
+      [Nn] ) break;;
+      * ) echo "Please answer [Y/n].";;
+  esac
+done
 
-# tldr
-if grep -Fxq "tldr" $packages_file; then
-  echo "* upgrade tldr ..."
-  if [ ! -d $(brew --prefix tldr) ]; then
-    echo "tldr is not installed"
-    exit 1
-  else
-    echo "start to upgrade tldr"
-    brew reinstall tldr
-  fi
-fi
-
-# tmux
-if grep -Fxq "tmux" $packages_file; then
-  echo "* upgrade tmux ..."
-  if [ ! -d $(brew --prefix tmux) ]; then
-    echo "tmux is not installed"
-    exit 1
-  else
-    echo "start to upgrade tmux"
-    brew reinstall tmux
-  fi
-fi
-
-# tmux-plugins
-if grep -Fxq "tmux-plugins" $packages_file; then
-  echo "* upgrade tmux-plugins ..."
-  if [ ! -d $HOME/.tmux/plugins/tpm ]; then
-    echo "tmux-plugins is not installed"
-    exit 1
-  else
-    echo "start to upgrade tmux-plugins"
-    cd $HOME/.tmux/plugins/tpm; git pull
-  fi
-fi
-
-# tree
-if grep -Fxq "tree" $packages_file; then
-  echo "* upgrade tree ..."
-  if [ ! -d $(brew --prefix tree) ]; then
-    echo "tree is not installed"
-    exit 1
-  else
-    echo "start to upgrade tree"
-		brew reinstall tree
-  fi
-fi
-
-cd $script_home

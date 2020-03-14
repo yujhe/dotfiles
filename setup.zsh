@@ -1,16 +1,16 @@
 #!/bin/zsh -e
 
-params="-sf"
-script_home="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SYMBOLIC_PARAMS="-sf"
+SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
 
-# Add our custom aliases to bash-it
-ln $params $script_home/custom.aliases ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/custom.aliases
+echo $SCRIPT_HOME
 
-cd $script_home
+ln $SYMBOLIC_PARAMS $SCRIPT_HOME/custom.aliases $HOME/.oh-my-zsh/custom/custom.aliases
+
 # Symlink all of our dotfiles to the home directory
 for i in .vimrc .dircolors .tmux.conf .zshrc;
 do
-  ln $params $script_home/$i $HOME/$i
+  ln $SYMBOLIC_PARAMS $SCRIPT_HOME/$i $HOME/$i
 done
 
 echo "reload dotfiles ..."
