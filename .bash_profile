@@ -1,5 +1,5 @@
-if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
+if [ -f $HOME/.bashrc ]; then
+   source $HOME/.bashrc
 fi
 # added by Anaconda3 5.3.0 installer
 # >>> conda init >>>
@@ -27,7 +27,7 @@ case $- in
 esac
 
 # Path to the bash it configuration
-export BASH_IT="/Users/yu-jhe.li/.bash_it"
+export BASH_IT=$HOME/.bash_it
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.

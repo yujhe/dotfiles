@@ -111,7 +111,7 @@ export FZF_BASE=$(brew --prefix fzf)/install
 
 # load anyenv
 if [ -d ${HOME}/.anyenv/bin ]; then
-  export PATH="${HOME}/.anyenv/bin:$PATH"
+  export PATH="$HOME/.anyenv/bin:$PATH"
   eval "$(anyenv init -)"
 fi
 
@@ -128,7 +128,7 @@ if [ -e ~/.dircolors ]; then
   eval `gdircolors -b ~/.dircolors`
 fi
 
-source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/custom.aliases
+source $HOME/.oh-my-zsh/custom/custom.aliases
 
 # fix python "may have been in progress in another thread when fork() was called" issue on mac
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
