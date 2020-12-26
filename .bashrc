@@ -62,3 +62,5 @@ fi
 
 export PATH=~/.local/bin:$PATH
 export PATH=~/go/bin:$PATH
+
+complete -C /Users/yu-jhe.li/.local/bin/terraform terraform
