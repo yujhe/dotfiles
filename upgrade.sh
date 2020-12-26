@@ -4,33 +4,21 @@ SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
 
 source $SCRIPT_HOME/packages.sh
 
-echo "checking Homebrew is installed or not"
+printf "checking Homebrew is installed or not: "
 if ! which -s brew; then
-  while true; do
-    read -p "Homebrew is required, do you wish to install? (Y/n) " yn
-    case $yn in
-        [Yy] )
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-          break;;
-        [Nn] ) exit;;
-        * ) echo "Please answer [Y/n].";;
-    esac
-  done
+  echo "(x) homebrew is required"
+  exit 1
 else
+  echo "(v) homebrew is installed"
   brew update
 fi
 
-echo "checking Git is installed or not"
+printf "checking Git is installed or not: "
 if [ ! -d $(brew --prefix git) ]; then
-  while true; do
-    read -p "Git is required, do you wish to install? (Y/n) " yn
-    case $yn in
-        [Yy] ) brew install git; break;;
-        [Nn] ) exit;;
-        * ) echo "Please answer [Y/n].";;
-    esac
-  done
+  echo "(x) git is required"
+  exit 1
 else
+  echo "(v) git is installed"
   brew upgrade git
 fi
 
@@ -71,7 +59,8 @@ done
 while true; do
   read -p "Do you wish to upgrade packages for Bash? (Y/n) " yn
   case $yn in
-      [Yy] )
+      [Nn] ) break;;
+      * )
         echo "start to upgrade packages for Bash: ${BASH_PACKAGES[@]}"
         for pkg in ${BASH_PACKAGES[@]}
         do
@@ -86,15 +75,14 @@ while true; do
           esac
         done
         break;;
-      [Nn] ) break;;
-      * ) echo "Please answer [Y/n].";;
   esac
 done
 
 while true; do
   read -p "Do you wish to upgrade packages for Zsh? (Y/n) " yn
   case $yn in
-      [Yy] )
+      [Nn] ) break;;
+      * )
         echo "start to upgrade packages for Zsh: ${ZSH_PACKAGES[@]}"
         for pkg in ${ZSH_PACKAGES[@]}
         do
@@ -111,8 +99,6 @@ while true; do
           esac
         done
         break;;
-      [Nn] ) break;;
-      * ) echo "Please answer [Y/n].";;
   esac
 done
 
