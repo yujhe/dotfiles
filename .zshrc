@@ -133,3 +133,14 @@ source $HOME/.oh-my-zsh/custom/custom.aliases
 # fix python "may have been in progress in another thread when fork() was called" issue on mac
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export no_proxy='*'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yu-jhe.li/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yu-jhe.li/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yu-jhe.li/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yu-jhe.li/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/yu-jhe.li/.local/bin/terraform terraform
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
