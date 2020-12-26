@@ -4,36 +4,38 @@ SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
 
 source $SCRIPT_HOME/packages.sh
 
-echo "checking Homebrew is installed or not"
+printf "checking Homebrew is installed or not: "
 if ! which -s brew; then
   while true; do
     read -p "Homebrew is required, do you wish to install? (Y/n) " yn
     case $yn in
-        [Yy] )
+        [Nn] ) exit;;
+        * )
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
           break;;
-        [Nn] ) exit;;
-        * ) echo "Please answer [Y/n].";;
     esac
   done
+else
+  echo "(v) homebrew is installed"
 fi
 
-echo "checking Git is installed or not"
+printf "checking Git is installed or not: "
 if [ ! -d $(brew --prefix git) ]; then
   while true; do
     read -p "Git is required, do you wish to install? (Y/n) " yn
     case $yn in
-        [Yy] ) brew install git; break;;
         [Nn] ) exit;;
-        * ) echo "Please answer [Y/n].";;
+        * ) brew install git; break;;
     esac
   done
+else
+  echo "(v) git is installed"
 fi
 
 echo "start to install packages: ${PACKAGES[@]}"
 for pkg in ${PACKAGES[@]}
 do
-  echo "checking $pkg is installed or not"
+  printf "checking $pkg is installed or not: "
   case $pkg in
     anyenv )
       if [ ! -d $HOME/.anyenv ]; then
@@ -101,14 +103,15 @@ do
       echo "undefined package: $pkg, please add to install.sh"
       continue;;
   esac
-  echo "(y) $pkg is installed"
+  echo "(v) $pkg is installed"
 done
 
 
 while true; do
   read -p "Do you wish to install packages for Bash? (Y/n) " yn
   case $yn in
-      [Yy] )
+      [Nn] ) break;;
+      * )
         echo "start to install packages for bash: ${BASH_PACKAGES[@]}"
         for pkg in ${BASH_PACKAGES[@]}
         do
@@ -127,18 +130,17 @@ while true; do
               echo "undefined package: $pkg, please add to install.sh"
               continue;;
           esac
-          echo "(y) $pkg is installed"
+          echo "(v) $pkg is installed"
         done
         break;;
-      [Nn] ) break;;
-      * ) echo "Please answer [Y/n].";;
   esac
 done
 
 while true; do
   read -p "Do you wish to install packages for Zsh? (Y/n) " yn
   case $yn in
-      [Yy] )
+      [Nn] ) break;;
+      * )
         echo "start to install packages for Zsh: ${ZSH_PACKAGES[@]}"
         for pkg in ${ZSH_PACKAGES[@]}
         do
@@ -162,11 +164,9 @@ while true; do
               echo "undefined package: $pkg, please add to install.sh"
               continue;;
           esac
-          echo "(y) $pkg is installed"
+          echo "(v) $pkg is installed"
         done
         break;;
-      [Nn] ) break;;
-      * ) echo "Please answer [Y/n].";;
   esac
 done
 
